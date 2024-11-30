@@ -1,5 +1,7 @@
 package com.remedios.remedio;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "remedios")
-@Table(name = "Remedio")
+@Table(name = "remedio")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -40,8 +42,8 @@ public class Remedio {
 	@Enumerated(EnumType.STRING)
 	private Via via;
 	private String lote;
-	private Integer quantidade;
-	private String validade;
+	private int quantidade;
+	private LocalDate validade;
 	@Enumerated(EnumType.STRING)
 	private Laboratorio laboratorio;
 
