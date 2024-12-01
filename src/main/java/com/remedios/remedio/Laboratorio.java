@@ -4,5 +4,6 @@ public enum Laboratorio {
     MEDLEY,
     ACHE,
     CIBA,
-    NATIVITA
+    NATIVITA,
+    CIMED
 }
