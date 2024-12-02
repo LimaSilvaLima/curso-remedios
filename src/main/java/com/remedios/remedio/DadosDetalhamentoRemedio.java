@@ -12,7 +12,8 @@ public record DadosDetalhamentoRemedio(
     Laboratorio laboratorio, 
     LocalDate validade,
     String lote, 
-    int quantidade
+    int quantidade,
+    Boolean ativo
 	
 ) {
     
@@ -23,7 +24,8 @@ public record DadosDetalhamentoRemedio(
         remedio.getLaboratorio(), 
         remedio.getValidade(),
 		remedio.getLote(), 
-        remedio.getQuantidade());
+        remedio.getQuantidade(),
+        remedio.getAtivo());
         
     }
 

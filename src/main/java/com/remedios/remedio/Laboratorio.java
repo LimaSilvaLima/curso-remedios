@@ -5,5 +5,8 @@ public enum Laboratorio {
     ACHE,
     CIBA,
     NATIVITA,
-    CIMED
+    CIMED,
+    BIOSINTETICA,
+    UNICHEM,
+    GLOBOPHARMA
 }
