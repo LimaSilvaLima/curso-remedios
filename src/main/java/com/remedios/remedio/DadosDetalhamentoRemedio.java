@@ -6,27 +6,24 @@ import java.time.LocalDate;
 
 public record DadosDetalhamentoRemedio(
 
- 	
-	Long id,
-	String nome,
-	Via via,
-	String lote,
-	int quantidade,
-	LocalDate validade,
-	Laboratorio laboratorio,
-	Boolean ativo
-
+    Long id, 
+    String nome, 
+    Via via, 
+    Laboratorio laboratorio, 
+    LocalDate validade,
+    String lote, 
+    int quantidade
+	
 ) {
     
     public DadosDetalhamentoRemedio(Remedio remedio){
-        this(
-        remedio.getId(),
-        remedio.getNome(),
-        remedio.getVia(),
-        remedio.getLote(),
-        remedio.getLaboratorio(),
-        remedio.getValidade()
-        remedio.getAtivo());
+        this(remedio.getId(), 
+        remedio.getNome(), 
+        remedio.getVia(), 
+        remedio.getLaboratorio(), 
+        remedio.getValidade(),
+		remedio.getLote(), 
+        remedio.getQuantidade());
         
     }
 
