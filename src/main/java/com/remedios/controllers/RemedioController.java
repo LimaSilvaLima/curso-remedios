@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.remedios.remedio.DadosAtualizarRemedio;
 import com.remedios.remedio.DadosCadastroRemedio;
+import com.remedios.remedio.DadosDetalhamentoRemedio;
 import com.remedios.remedio.DadosListagemRemedio;
 import com.remedios.remedio.Remedio;
 import com.remedios.remedio.RemedioRepository;
@@ -35,28 +36,32 @@ public class RemedioController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroRemedio dados){
+    public ResponseEntity<> cadastrar(@RequestBody @Valid DadosCadastroRemedio dados){
         repository.save(new Remedio (dados));
         
     }
     
     @GetMapping
-    public List<DadosListagemRemedio> listar(){
-        return repository.findAllByAtivoTrue().stream().map(DadosListagemRemedio::new).toList();
+    public ResponseEntity<List<DadosListagemRemedio>>listar(){
+        var lista = repository.findAllByAtivoTrue().stream().map(DadosListagemRemedio::new).toList();
+        return ResponseEntity.ok(lista);
+
     }
 
     @PutMapping
     @Transactional
-    public void atualizar (@RequestBody  @Valid DadosAtualizarRemedio dados) {
+    public ResponseEntity<DadosDetalhamentoRemedio> atualizar (@RequestBody  @Valid DadosAtualizarRemedio dados) {
         var remedio = repository.getReferenceById(dados.id());
         remedio.atualizarInformacoes(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoRemedio(remedio));
         
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void excluir(@PathVariable Long id) {
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
         repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("inativar/{id}")
@@ -69,14 +74,12 @@ public class RemedioController {
 
     @PutMapping("reativar/{id}")
     @Transactional
-    public void reativar(@PathVariable Long id){
+    public ResponseEntity<Void> reativar(@PathVariable Long id){
         var remedio = repository.getReferenceById(id);
         remedio.reativar();
+        return ResponseEntity.noContent().build();
     }
 
-
- 
-    
 
 
 }
