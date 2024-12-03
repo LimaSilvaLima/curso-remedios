@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,7 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "Usuario")
-@Table(name = "Usuarios")
+@Table(name = "usuarios")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,6 +26,8 @@ public class Usuario {
     private String login;
     private String senha;
 
+   
+    
     private int ativo;
     //@NotBlank
     private String nome;
