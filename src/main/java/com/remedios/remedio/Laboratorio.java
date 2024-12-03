@@ -8,5 +8,6 @@ public enum Laboratorio {
     CIMED,
     BIOSINTETICA,
     UNICHEM,
-    GLOBOPHARMA
+    GLOBOPHARMA,
+    VITAMEDICA
 }
