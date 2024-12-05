@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.remedios.infra.DadosTokenJWT;
 import com.remedios.infra.TokenService;
 import com.remedios.usuarios.DadosAutenticacao;
 import com.remedios.usuarios.Usuario;
@@ -32,7 +33,8 @@ public class AutenticacaoController {
     public ResponseEntity<?> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
         var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var  autenticacao = manager.authenticate(token);
-        return ResponseEntity.ok(tokenService.gerarToken((Usuario) autenticacao.getPrincipal()));
+        var tokenJWT = tokenService.gerarToken((Usuario) autenticacao.getPrincipal());
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
 
     }
 
