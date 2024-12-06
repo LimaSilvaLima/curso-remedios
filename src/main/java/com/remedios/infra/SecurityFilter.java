@@ -1,9 +1,12 @@
 package com.remedios.infra;
 import com.remedios.infra.TokenService;
+import com.remedios.usuarios.UsuarioRepository;
 
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -16,7 +19,9 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SecurityFilter extends OncePerRequestFilter{
 
     @Autowired
-    private TokenService tokenService;
+    private TokenService tokenService; 
+    @Autowired
+    private UsuarioRepository repository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -24,6 +29,12 @@ public class SecurityFilter extends OncePerRequestFilter{
         var tokenJWT = recuperarToken(request);
         if (tokenJWT != null) {
             var subject = tokenService.getSubject(tokenJWT);
+            var usuario = repository.findByLogin(subject);
+
+            var autentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+            
+            SecurityContextHolder.getContext().setAuthentication(autentication);
+
         }
 
         
